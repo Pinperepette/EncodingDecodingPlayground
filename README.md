@@ -19,6 +19,5 @@ To add new encoding or decoding methods, follow these rules:
 
 3. **Folder Placement:** Place your encoding scripts in the `encoding_scripts` directory and decoding scripts in the `decoding_scripts` directory.
 
-4. **App Restart:** After adding new scripts, restart the Flask application to allow it to recognize the changes and make the new methods available in the app.
 
 ![Alt Text](https://github.com/Pinperepette/EncodingDecodingPlayground/blob/main/imm.png)
