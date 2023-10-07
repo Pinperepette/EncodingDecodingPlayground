@@ -21,3 +21,4 @@ To add new encoding or decoding methods, follow these rules:
 
 4. **App Restart:** After adding new scripts, restart the Flask application to allow it to recognize the changes and make the new methods available in the app.
 
+![Alt Text](https://github.com/Pinperepette/EncodingDecodingPlayground/blob/main/imm.png)
