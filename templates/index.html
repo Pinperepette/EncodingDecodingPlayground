@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Encoding/Decoding</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Text Encoding/Decoding</h1>
+        <form id="encoding-form">
+            <div class="form-group">
+                <label for="encoding-script">Choose an encoding script:</label>
+                <select class="form-control" id="encoding-script" name="script">
+                    {% for script in encoding_scripts %}
+                    <option>{{ script }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="encoding-text">Enter text to encode:</label>
+                <input type="text" class="form-control" id="encoding-text" name="text">
+            </div>
+            <button type="submit" class="btn btn-primary">Encode</button>
+        </form>
+
+        <div class="mt-5">
+            <h2>Decoding</h2>
+            <form id="decoding-form">
+                <div class="form-group">
+                    <label for="decoding-script">Choose a decoding script:</label>
+                    <select class="form-control" id="decoding-script" name="script">
+                        {% for script in decoding_scripts %}
+                        <option>{{ script }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="decoding-text">Enter encoded text:</label>
+                    <input type="text" class="form-control" id="decoding-text" name="text">
+                </div>
+                <button type="submit" class="btn btn-primary">Decode</button>
+            </form>
+        </div>
+
+        <div class="mt-5" id="result">
+            <h2>Result:</h2>
+            <p id="result-text"></p>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        $(document).ready(function(){
+            $('#encoding-form').submit(function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/encode',
+                    data: $('#encoding-form').serialize(),
+                    success: function(response){
+                        $('#result-text').text(response);
+                    }
+                });
+            });
+
+            $('#decoding-form').submit(function(event){
+                event.preventDefault();
+                $.ajax({
+                    type: 'POST',
+                    url: '/decode',
+                    data: $('#decoding-form').serialize(),
+                    success: function(response){
+                        $('#result-text').text(response);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
